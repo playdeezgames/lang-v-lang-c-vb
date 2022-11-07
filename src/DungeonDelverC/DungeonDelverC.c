@@ -12,10 +12,12 @@ int main(int argc, char** argv)
 	{
 		if (0 == SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer))
 		{
+			//initialize application
 			SDL_Event event = { 0 };
 			for (;;)
 			{
 				SDL_RenderClear(renderer);
+				//draw to renderer
 				SDL_RenderPresent(renderer);
 				if (1 == SDL_WaitEvent(&event))
 				{
@@ -23,8 +25,10 @@ int main(int argc, char** argv)
 					{
 						break;
 					}
+					//handle event
 				}
 			}
+			//clean up application
 			if (renderer)
 			{
 				SDL_DestroyRenderer(renderer);
