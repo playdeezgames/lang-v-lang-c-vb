@@ -1,9 +1,5 @@
-#include <SDL.h>
-extern SDL_Window* g_window;
-extern SDL_Renderer* g_renderer;
-int GetScreenWidth();
-int GetScreenHeight();
-
+#include "Globals.h"
+#include "Boilerplate.h"
 int HandleKeyDown(SDL_KeyCode code, int(*updater)(char))
 {
 	switch (code)

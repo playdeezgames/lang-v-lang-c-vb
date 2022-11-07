@@ -140,12 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boilerplate.c" />
-    <ClCompile Include="DungeonDelverC.c" />
+    <ClCompile Include="Main.c" />
     <ClCompile Include="Globals.c" />
     <ClCompile Include="Application.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DungeonDelverC.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Boilerplate.h" />
+    <ClInclude Include="Globals.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,13 +1,13 @@
-int Updater(char command)
+int Application_Updater(char command)
 {
 	return '.' != command;
 }
-void Initialize()
+void Application_Initialize()
 {
 }
-void Draw()
+void Application_Draw()
 {
 }
-void CleanUp()
+void Application_CleanUp()
 {
 }
