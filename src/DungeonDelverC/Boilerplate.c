@@ -51,15 +51,15 @@ int HandleKeyDown(SDL_KeyCode code, int(*updater)(char))
 		return 1;
 	}
 }
-void Boilerplate_Loop(int running, void (*drawer)(), int(*updater)(char))
+void Boilerplate_Loop(int running, void (*drawer)(SDL_Renderer*), int(*updater)(char))
 {
 	SDL_Event event = { 0 };
 	for (; running;)
 	{
 		SDL_RenderClear(g_renderer);
-		drawer();
+		drawer(g_renderer);
 		SDL_RenderPresent(g_renderer);
-		if (1 == SDL_WaitEvent(&event))
+		while(running && SDL_PollEvent(&event))
 		{
 			switch (event.type)
 			{

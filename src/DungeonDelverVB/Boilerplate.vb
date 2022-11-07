@@ -25,6 +25,7 @@
         Dim [event] As New SDL_Event
         Do
             SDL_RenderClear(g_renderer)
+            drawer()
             SDL_RenderPresent(g_renderer)
             If SDL_WaitEvent([event]) = 1 Then
                 Select Case [event].type

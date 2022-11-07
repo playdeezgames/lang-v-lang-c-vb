@@ -1,6 +1,15 @@
 ﻿Imports System.Runtime.InteropServices
 
 Module SDL2
+    Declare Function SDL_RenderCopy Lib "SDL2.dll" (renderer As IntPtr,
+                                           texture As IntPtr,
+                                           srcrect As SDL_Rect,
+                                           dstrect As SDL_Rect) As Integer
+    Declare Sub SDL_DestroyTexture Lib "SDL2.dll" (texture As IntPtr)
+    Declare Function IMG_LoadTexture Lib "SDL2_image.dll" (renderer As IntPtr, <MarshalAs(UnmanagedType.LPStr)> file As String) As IntPtr
+    Declare Function SDL_RenderSetLogicalSize Lib "SDL2.dll" (renderer As IntPtr, w As Integer, h As Integer) As Integer
+    Declare Function IMG_Init Lib "SDL2_image.dll" (flags As Integer) As Integer
+    Declare Sub IMG_Quit Lib "SDL2_image.dll" ()
     Declare Function SDL_Init Lib "SDL2.dll" (flags As UInt32) As Integer
     Declare Function SDL_CreateWindowAndRenderer Lib "SDL2.dll" (
                                                                 ByVal width As Integer,
@@ -54,4 +63,10 @@ Module SDL2
     Friend Const SDLK_KP_9 As UInt32 = 1073741921
     Friend Const SDLK_KP_0 As UInt32 = 1073741922
     Friend Const SDLK_KP_PERIOD As UInt32 = 1073741923
+    Structure SDL_Rect
+        Public x As Integer
+        Public y As Integer
+        Public w As Integer
+        Public h As Integer
+    End Structure
 End Module
