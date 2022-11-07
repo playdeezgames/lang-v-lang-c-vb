@@ -6,7 +6,7 @@ enum
 };
 int HandleCommand(char command)
 {
-	return 1;
+	return '.'!=command;
 }
 int HandleKeyDown(SDL_KeyCode code)
 {
