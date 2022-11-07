@@ -139,7 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boilerplate.c" />
     <ClCompile Include="DungeonDelverC.c" />
+    <ClCompile Include="Globals.c" />
+    <ClCompile Include="Application.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DungeonDelverC.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

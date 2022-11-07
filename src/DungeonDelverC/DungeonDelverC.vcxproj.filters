@@ -18,5 +18,19 @@
     <ClCompile Include="DungeonDelverC.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Application.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Globals.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Boilerplate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DungeonDelverC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
