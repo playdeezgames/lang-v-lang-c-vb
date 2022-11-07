@@ -143,11 +143,13 @@
     <ClCompile Include="Main.c" />
     <ClCompile Include="Globals.c" />
     <ClCompile Include="Application.c" />
+    <ClCompile Include="Textures.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Boilerplate.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="Textures.h" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="romfont8x8.png" />

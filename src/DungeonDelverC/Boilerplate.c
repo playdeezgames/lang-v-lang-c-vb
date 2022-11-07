@@ -56,9 +56,9 @@ void Boilerplate_Loop(int running, void (*drawer)(), int(*updater)(char))
 	SDL_Event event = { 0 };
 	for (; running;)
 	{
-		SDL_RenderClear(g_renderer);
-		drawer(g_renderer);
-		SDL_RenderPresent(g_renderer);
+		SDL_RenderClear(Globals_GetRenderer());
+		drawer();
+		SDL_RenderPresent(Globals_GetRenderer());
 		while(running && SDL_PollEvent(&event))
 		{
 			switch (event.type)
@@ -79,7 +79,11 @@ int Boilerplate_Initialize(void(*initializer)())
 	{
 		return 0;
 	}
-	int running = 0 == SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &g_window, &g_renderer);
+	SDL_Window* window = 0;
+	SDL_Renderer* renderer = 0;
+	int running = 0 == SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
+	Globals_SetRenderer(renderer);
+	Globals_SetWindow(window);
 	if (running)
 	{
 		initializer();
@@ -89,15 +93,15 @@ int Boilerplate_Initialize(void(*initializer)())
 void Boilerplate_CleanUp(void(*cleaner)())
 {
 	cleaner();
-	if (g_renderer)
+	if (Globals_GetRenderer())
 	{
-		SDL_DestroyRenderer(g_renderer);
-		g_renderer = 0;
+		SDL_DestroyRenderer(Globals_GetRenderer());
+		Globals_SetRenderer(0);
 	}
-	if (g_window)
+	if (Globals_GetWindow())
 	{
-		SDL_DestroyWindow(g_window);
-		g_window = 0;
+		SDL_DestroyWindow(Globals_GetWindow());
+		Globals_SetWindow(0);
 	}
 	SDL_Quit();
 }
