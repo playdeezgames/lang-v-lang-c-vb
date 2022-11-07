@@ -4,11 +4,15 @@
 #include <SDL_image.h>
 static const char* s_filenames[TEXTURES_COUNT] = {"romfont8x8.png"};
 static SDL_Texture* s_textures[TEXTURES_COUNT];
+struct Globals* Textures_GetGlobals()
+{
+	return 0;
+}
 void Textures_Initialize()
 {
 	for (int index = 0; index < TEXTURES_COUNT; ++index)
 	{
-		s_textures[index] = IMG_LoadTexture(Globals_GetRenderer(), s_filenames[index]);
+		s_textures[index] = IMG_LoadTexture(Globals_GetRenderer(Textures_GetGlobals()), s_filenames[index]);
 	}
 }
 

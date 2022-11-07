@@ -6,9 +6,10 @@ enum
 	SCREEN_WIDTH = 1280,
 	SCREEN_HEIGHT = 720
 };
-SDL_Window* Globals_GetWindow();
-void Globals_SetWindow(SDL_Window* window);
-SDL_Renderer* Globals_GetRenderer();
-void Globals_SetRenderer(SDL_Renderer* renderer);
+struct Globals;
+SDL_Window* Globals_GetWindow(struct Globals* ptr);
+void Globals_SetWindow(struct Globals* ptr, SDL_Window* window);
+SDL_Renderer* Globals_GetRenderer(struct Globals* ptr);
+void Globals_SetRenderer(struct Globals* ptr, SDL_Renderer* renderer);
 #endif
 

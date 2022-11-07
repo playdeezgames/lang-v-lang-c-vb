@@ -5,9 +5,13 @@ int Application_Updater(char command)
 {
 	return '.' != command;
 }
+struct Globals* Application_GetGlobals()
+{
+	return 0;
+}
 void Application_Initialize()
 {
-	SDL_RenderSetLogicalSize(Globals_GetRenderer(), SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	SDL_RenderSetLogicalSize(Globals_GetRenderer(Application_GetGlobals()), SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	IMG_Init(IMG_INIT_PNG);
 	Textures_Initialize();
 }
@@ -15,7 +19,7 @@ void Application_Draw(SDL_Renderer* renderer)
 {
 	SDL_Rect dst = {0,0,16,16};
 	SDL_Rect src = { 32,0,16,16 };
-	SDL_RenderCopy(Globals_GetRenderer(), Textures_get(TEXTURES_ROMFONT), &src, &dst);
+	SDL_RenderCopy(Globals_GetRenderer(Application_GetGlobals()), Textures_get(TEXTURES_ROMFONT), &src, &dst);
 }
 void Application_CleanUp()
 {

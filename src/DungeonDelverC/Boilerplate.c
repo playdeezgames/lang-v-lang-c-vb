@@ -1,5 +1,9 @@
 #include "Globals.h"
 #include "Boilerplate.h"
+struct Globals* Boilerplate_GetGlobals()
+{
+	return 0;
+}
 int HandleKeyDown(SDL_KeyCode code, int(*updater)(char))
 {
 	switch (code)
@@ -56,9 +60,9 @@ void Boilerplate_Loop(int running, void (*drawer)(), int(*updater)(char))
 	SDL_Event event = { 0 };
 	for (; running;)
 	{
-		SDL_RenderClear(Globals_GetRenderer());
+		SDL_RenderClear(Globals_GetRenderer(Boilerplate_GetGlobals()));
 		drawer();
-		SDL_RenderPresent(Globals_GetRenderer());
+		SDL_RenderPresent(Globals_GetRenderer(Boilerplate_GetGlobals()));
 		while(running && SDL_PollEvent(&event))
 		{
 			switch (event.type)
@@ -82,8 +86,8 @@ int Boilerplate_Initialize(void(*initializer)())
 	SDL_Window* window = 0;
 	SDL_Renderer* renderer = 0;
 	int running = 0 == SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
-	Globals_SetRenderer(renderer);
-	Globals_SetWindow(window);
+	Globals_SetRenderer(Boilerplate_GetGlobals(), renderer);
+	Globals_SetWindow(Boilerplate_GetGlobals(), window);
 	if (running)
 	{
 		initializer();
@@ -93,15 +97,15 @@ int Boilerplate_Initialize(void(*initializer)())
 void Boilerplate_CleanUp(void(*cleaner)())
 {
 	cleaner();
-	if (Globals_GetRenderer())
+	if (Globals_GetRenderer(Boilerplate_GetGlobals()))
 	{
-		SDL_DestroyRenderer(Globals_GetRenderer());
-		Globals_SetRenderer(0);
+		SDL_DestroyRenderer(Globals_GetRenderer(Boilerplate_GetGlobals()));
+		Globals_SetRenderer(Boilerplate_GetGlobals(), 0);
 	}
-	if (Globals_GetWindow())
+	if (Globals_GetWindow(Boilerplate_GetGlobals()))
 	{
-		SDL_DestroyWindow(Globals_GetWindow());
-		Globals_SetWindow(0);
+		SDL_DestroyWindow(Globals_GetWindow(Boilerplate_GetGlobals()));
+		Globals_SetWindow(Boilerplate_GetGlobals(), 0);
 	}
 	SDL_Quit();
 }
