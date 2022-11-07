@@ -17,10 +17,12 @@ int main(int argc, char** argv)
 			{
 				SDL_RenderClear(renderer);
 				SDL_RenderPresent(renderer);
-				SDL_WaitEvent(&event);
-				if (SDL_QUIT == event.type)
+				if (1 == SDL_WaitEvent(&event))
 				{
-					break;
+					if (SDL_QUIT == event.type)
+					{
+						break;
+					}
 				}
 			}
 			if (renderer)
