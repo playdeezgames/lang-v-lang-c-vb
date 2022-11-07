@@ -16,11 +16,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="romfont8x8.png" />
     <None Remove="SDL2.dll" />
     <None Remove="SDL2_image.dll" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="romfont8x8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="SDL2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
