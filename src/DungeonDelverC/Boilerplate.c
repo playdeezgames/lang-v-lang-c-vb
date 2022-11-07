@@ -79,7 +79,7 @@ int Boilerplate_Initialize(void(*initializer)())
 	{
 		return 0;
 	}
-	int running = 0 == SDL_CreateWindowAndRenderer(GetScreenWidth(), GetScreenHeight(), 0, &g_window, &g_renderer);
+	int running = 0 == SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &g_window, &g_renderer);
 	if (running)
 	{
 		initializer();

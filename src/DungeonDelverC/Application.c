@@ -7,7 +7,7 @@ int Application_Updater(char command)
 }
 void Application_Initialize()
 {
-	SDL_RenderSetLogicalSize(g_renderer, GetScreenWidth() / 2, GetScreenHeight() / 2);
+	SDL_RenderSetLogicalSize(g_renderer, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	IMG_Init(IMG_INIT_PNG);
 	g_texture = IMG_LoadTexture(g_renderer, "romfont8x8.png");
 }
