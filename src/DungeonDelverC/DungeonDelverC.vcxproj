@@ -149,6 +149,9 @@
     <ClInclude Include="Boilerplate.h" />
     <ClInclude Include="Globals.h" />
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="romfont8x8.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

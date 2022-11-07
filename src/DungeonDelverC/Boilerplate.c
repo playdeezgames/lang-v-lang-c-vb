@@ -51,7 +51,7 @@ int HandleKeyDown(SDL_KeyCode code, int(*updater)(char))
 		return 1;
 	}
 }
-void Boilerplate_Loop(int running, void (*drawer)(SDL_Renderer*), int(*updater)(char))
+void Boilerplate_Loop(int running, void (*drawer)(), int(*updater)(char))
 {
 	SDL_Event event = { 0 };
 	for (; running;)

@@ -7,7 +7,7 @@
     End Sub
     Friend Sub Draw()
         Dim dst As New SDL_Rect() With {.x = 0, .y = 0, .w = 16, .h = 16}
-        Dim src As New SDL_Rect() With {.x = 16, .y = 0, .w = 16, .h = 16}
+        Dim src As New SDL_Rect() With {.x = 32, .y = 0, .w = 16, .h = 16}
         SDL_RenderCopy(g_renderer, g_texture, src, dst)
     End Sub
     Friend Sub CleanUp()

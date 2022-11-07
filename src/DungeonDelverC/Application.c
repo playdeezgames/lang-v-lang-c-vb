@@ -9,7 +9,7 @@ void Application_Initialize()
 {
 	SDL_RenderSetLogicalSize(g_renderer, GetScreenWidth() / 2, GetScreenHeight() / 2);
 	IMG_Init(IMG_INIT_PNG);
-	g_texture = IMG_LoadTexture(g_renderer, "E:\\GIT\\lang-v-lang-c-vb\\assets\\romfont8x8.png");
+	g_texture = IMG_LoadTexture(g_renderer, "romfont8x8.png");
 }
 void Application_Draw(SDL_Renderer* renderer)
 {
