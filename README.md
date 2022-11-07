@@ -1,6 +1,12 @@
 # lang-v-lang-c-vb
 Language v. Language: C versus VB.NET
 
+# Log
+
+XYZ Lang v. Lang: C and VB Edition #Niche4Life
+
+* 001 - 20221107
+
 # Rules
 
 * SDL etc may be used
