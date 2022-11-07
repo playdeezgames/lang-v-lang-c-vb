@@ -55,7 +55,7 @@ int HandleKeyDown(SDL_KeyCode code, int(*updater)(char))
 		return 1;
 	}
 }
-void Boilerplate_Loop(int running, void (*drawer)(), int(*updater)(char))
+void Boilerplate_Loop(struct Boilerplate* ptr, int running, void (*drawer)(), int(*updater)(char))
 {
 	SDL_Event event = { 0 };
 	for (; running;)
@@ -77,7 +77,7 @@ void Boilerplate_Loop(int running, void (*drawer)(), int(*updater)(char))
 		}
 	}
 }
-int Boilerplate_Initialize(void(*initializer)())
+int Boilerplate_Initialize(struct Boilerplate* ptr, void(*initializer)())
 {
 	if (0 != SDL_Init(SDL_INIT_EVERYTHING))
 	{
@@ -94,7 +94,7 @@ int Boilerplate_Initialize(void(*initializer)())
 	}
 	return running;
 }
-void Boilerplate_CleanUp(void(*cleaner)())
+void Boilerplate_CleanUp(struct Boilerplate* ptr, void(*cleaner)())
 {
 	cleaner();
 	if (Globals_GetRenderer(Boilerplate_GetGlobals()))
