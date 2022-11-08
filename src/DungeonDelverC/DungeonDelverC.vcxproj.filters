@@ -18,6 +18,12 @@
     <ClCompile Include="Main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SrcRects.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DstRects.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="romfont8x8.png">

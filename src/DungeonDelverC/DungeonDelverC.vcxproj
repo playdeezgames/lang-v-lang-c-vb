@@ -139,7 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DstRects.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="SrcRects.c" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="romfont8x8.png" />

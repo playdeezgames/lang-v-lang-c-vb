@@ -1,41 +1,71 @@
 #include <SDL.h>
+#include <SDL_image.h>
 #include <stdio.h>
 enum {
 	SCREEN_WIDTH = 1280,
 	SCREEN_HEIGHT = 720,
-	LOGICAL_WIDTH = 640,
-	LOGICAL_HEIGHT = 360
+	CELL_WIDTH = 16,
+	CELL_HEIGHT = 16,
+
+	LOGICAL_WIDTH = SCREEN_WIDTH / 2,
+	LOGICAL_HEIGHT = SCREEN_HEIGHT / 2,
+	GRID_COLUMNS = LOGICAL_WIDTH/ CELL_WIDTH,
+	GRID_ROWS = LOGICAL_HEIGHT/CELL_HEIGHT
 };
+extern SDL_Rect srcRects[];
+extern SDL_Rect dstRects[];
 int main(int argc, char** argv)
 {
 	SDL_Window* window = 0;
 	SDL_Renderer* renderer = 0;
 	SDL_Event event = { 0 };
+	SDL_Texture* texture = 0;
+	int index = 0;
+	int delta = 0;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING)) goto PreinitializationFailure;
-
+	IMG_Init(IMG_INIT_PNG);
 	if (SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer)) goto PostInitializationFailure;
+	SDL_RenderSetLogicalSize(renderer, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+	texture = IMG_LoadTexture(renderer, "romfont8x8.png");
 
-Draw:
+StartDraw:
 	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, texture, srcRects+2, dstRects+index);
 	SDL_RenderPresent(renderer);
 
-HandleEvents:
-	if (!SDL_PollEvent(&event)) goto Draw;
+StartEventLoop:
+	if (!SDL_PollEvent(&event)) goto StartDraw;
 
-	if (event.type == SDL_QUIT) goto DestroyRenderer;
+	if (event.type == SDL_QUIT) goto EndEventLoop;
+	
+	if (event.type != SDL_KEYDOWN) goto PostKeyDownEvent;
+	delta = 
+		(SDLK_LEFT == event.key.keysym.sym) ? (-1) :
+		(SDLK_RIGHT == event.key.keysym.sym) ? (1) :
+		(SDLK_UP == event.key.keysym.sym) ? (-GRID_COLUMNS) :
+		(SDLK_DOWN == event.key.keysym.sym) ? (GRID_COLUMNS) :
+		(0);
+	index = (index + delta) % (GRID_COLUMNS * GRID_ROWS);
+PostKeyDownEvent:
 
-	goto Draw;
 
-DestroyRenderer:
-	if (!renderer) goto DestroyWindow;
+	goto StartEventLoop;
+EndEventLoop:
+
+	if (!texture) goto PostDestroyTexture;
+	SDL_DestroyTexture(texture);
+PostDestroyTexture:
+
+	if (!renderer) goto PostDestroyRenderer;
 	SDL_DestroyRenderer(renderer);
+PostDestroyRenderer:
 
-DestroyWindow:
-	if (!window) goto CleanUpSDL;
+	if (!window) goto PostDestroyWindow;
 	SDL_DestroyWindow(window);
+PostDestroyWindow:
 
-CleanUpSDL:
+	IMG_Quit();
 	SDL_Quit();
 	return 0;
 
@@ -43,6 +73,6 @@ PostInitializationFailure:
 	SDL_Quit();
 
 PreinitializationFailure:
-	fprintf("%s", SDL_GetError());
+	fprintf(stderr, "%s", SDL_GetError());
 	return -1;
 }
