@@ -5,7 +5,8 @@ enum {
 	TEXTURES_ROMFONT,
 	TEXTURES_COUNT
 };
-void Textures_Initialize();
-SDL_Texture* Textures_get(int);
-void Textures_CleanUp();
+struct Textures;
+struct Textures* Textures_Initialize(struct Globals*);
+SDL_Texture* Textures_get(struct Textures*, int);
+void Textures_CleanUp(struct Textures**);
 #endif

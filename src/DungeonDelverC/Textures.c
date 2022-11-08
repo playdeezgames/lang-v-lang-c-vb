@@ -3,32 +3,43 @@
 #include <SDL.h>
 #include <SDL_image.h>
 static const char* s_filenames[TEXTURES_COUNT] = {"romfont8x8.png"};
-static SDL_Texture* s_textures[TEXTURES_COUNT];
-struct Globals* Textures_GetGlobals()
+struct Textures
 {
-	return 0;
+	struct Globals* globals;
+	SDL_Texture* textures[TEXTURES_COUNT];
+};
+static struct Globals* Textures_GetGlobals(struct Textures* ptr)
+{
+	return ptr->globals;
 }
-void Textures_Initialize()
+struct Textures* Textures_Initialize(struct Globals* globals)
 {
+	struct Textures* ptr = (struct Textures*)SDL_malloc(sizeof(struct Textures));
+	SDL_memset(ptr, 0, sizeof(struct Textures));
+	ptr->globals = globals;
 	for (int index = 0; index < TEXTURES_COUNT; ++index)
 	{
-		s_textures[index] = IMG_LoadTexture(Globals_GetRenderer(Textures_GetGlobals()), s_filenames[index]);
+		ptr->textures[index] = IMG_LoadTexture(Globals_GetRenderer(Textures_GetGlobals(ptr)), s_filenames[index]);
 	}
+	return ptr;
 }
 
-SDL_Texture* Textures_get(int index)
+SDL_Texture* Textures_get(struct Textures* ptr, int index)
 {
-	return s_textures[index];
+	return ptr->textures[index];
 }
 
-void Textures_CleanUp()
+void Textures_CleanUp(struct Textures** ptr)
 {
-	for (int index = 0; index < TEXTURES_COUNT; ++index)
+	if (ptr && *ptr)
 	{
-		if (s_textures[index])
+		for (int index = 0; index < TEXTURES_COUNT; ++index)
 		{
-			SDL_DestroyTexture(s_textures[index]);
-			s_textures[index] = 0;
+			if ((*ptr)->textures[index])
+			{
+				SDL_DestroyTexture((*ptr)->textures[index]);
+				(*ptr)->textures[index] = 0;
+			}
 		}
 	}
 }
