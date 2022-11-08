@@ -37,5 +37,11 @@
     <ClInclude Include="Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SrcRects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DstRects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

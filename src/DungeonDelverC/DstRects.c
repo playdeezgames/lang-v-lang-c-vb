@@ -1,4 +1,4 @@
-#include <SDL.h>
+#include "DstRects.h"
 SDL_Rect dstRects[] = 
 {
 	{ 0x000, 0x000, 0x10, 0x10 },
@@ -882,3 +882,7 @@ SDL_Rect dstRects[] =
 	{ 0x260, 0x150, 0x10, 0x10 },
 	{ 0x270, 0x150, 0x10, 0x10 }
 };
+SDL_Rect* GetDstRect(int index)
+{
+	return dstRects + index;
+}

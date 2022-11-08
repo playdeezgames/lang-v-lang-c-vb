@@ -1,4 +1,4 @@
-#include <SDL.h>
+#include "SrcRects.h"
 SDL_Rect srcRects[] = {
 	{  0,  0,16,16},
 	{ 16,  0,16,16},
@@ -257,3 +257,7 @@ SDL_Rect srcRects[] = {
 	{ 224,  240,16,16 },
 	{ 240,  240,16,16 }
 };
+SDL_Rect* GetSrcRect(int index)
+{
+	return srcRects + index;
+}

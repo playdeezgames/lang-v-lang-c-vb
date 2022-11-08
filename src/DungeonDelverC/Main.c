@@ -2,15 +2,15 @@
 #include <SDL_image.h>
 #include <stdio.h>
 #include "Constants.h"
+#include "SrcRects.h"
+#include "DstRects.h"
 enum {
 	CELLTYPE_EMPTY,
 	CELLTYPE_WALL,
 	CELLTYPE_DUDE,
 	CELLTYPE_COUNT
 };
-extern SDL_Rect srcRects[];
-extern SDL_Rect dstRects[];
-extern unsigned char cellMap[];
+extern unsigned char cellMap[GRID_COUNT];
 struct CellType
 {
 	unsigned char character;
@@ -48,7 +48,7 @@ StartDraw:
 StartRenderCell:
 	if (GRID_COUNT == cell) goto EndRenderCell;
 	SDL_SetTextureColorMod(texture, cellTypes[cellMap[cell]].color.r, cellTypes[cellMap[cell]].color.g, cellTypes[cellMap[cell]].color.b);
-	SDL_RenderCopy(renderer, texture, &srcRects[cellTypes[cellMap[cell]].character], &dstRects[cell]);
+	SDL_RenderCopy(renderer, texture, GetSrcRect(cellTypes[cellMap[cell]].character), GetDstRect(cell));
 	++cell;
 	goto StartRenderCell;
 EndRenderCell:
