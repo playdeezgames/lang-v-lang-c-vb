@@ -20,13 +20,13 @@ enum {
 };
 extern SDL_Rect srcRects[];
 extern SDL_Rect dstRects[];
-extern unsigned char map[];
-struct Cell
+extern unsigned char cellMap[];
+struct CellType
 {
 	unsigned char character;
 	SDL_Color color;
 };
-struct Cell cellTypes[] =
+struct CellType cellTypes[] =
 {
 	{0x00,{0x00,0x00,0x00,0xFF}},
 	{0xDB,{0x00,0x00,0xFF,0xFF}},
@@ -51,19 +51,19 @@ int main(int argc, char** argv)
 	texture = IMG_LoadTexture(renderer, "romfont8x8.png");
 
 StartDraw:
-	old = map[index];
-	map[index] = CELLTYPE_DUDE;
+	old = cellMap[index];
+	cellMap[index] = CELLTYPE_DUDE;
 	SDL_RenderClear(renderer);
 	cell = 0;
 StartRenderCell:
 	if (GRID_COUNT == cell) goto EndRenderCell;
-	SDL_SetTextureColorMod(texture, cellTypes[map[cell]].color.r, cellTypes[map[cell]].color.g, cellTypes[map[cell]].color.b);
-	SDL_RenderCopy(renderer, texture, &srcRects[cellTypes[map[cell]].character], &dstRects[cell]);
+	SDL_SetTextureColorMod(texture, cellTypes[cellMap[cell]].color.r, cellTypes[cellMap[cell]].color.g, cellTypes[cellMap[cell]].color.b);
+	SDL_RenderCopy(renderer, texture, &srcRects[cellTypes[cellMap[cell]].character], &dstRects[cell]);
 	++cell;
 	goto StartRenderCell;
 EndRenderCell:
 	SDL_RenderPresent(renderer);
-	map[index] = old;
+	cellMap[index] = old;
 
 StartEventLoop:
 	if (!SDL_PollEvent(&event)) goto StartDraw;
@@ -79,7 +79,7 @@ StartEventLoop:
 		(0);
 	nextIndex = (index + delta) % (GRID_COUNT);
 
-	index = (0 == map[nextIndex]) ? (nextIndex) : (index);
+	index = (0 == cellMap[nextIndex]) ? (nextIndex) : (index);
 PostKeyDownEvent:
 
 
