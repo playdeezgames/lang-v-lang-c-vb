@@ -13,9 +13,25 @@ enum {
 	GRID_ROWS = LOGICAL_HEIGHT/CELL_HEIGHT,
 	GRID_COUNT = GRID_COLUMNS * GRID_ROWS
 };
+enum {
+	CELLTYPE_EMPTY,
+	CELLTYPE_WALL,
+	CELLTYPE_DUDE
+};
 extern SDL_Rect srcRects[];
 extern SDL_Rect dstRects[];
 extern unsigned char map[];
+struct Cell
+{
+	unsigned char character;
+	SDL_Color color;
+};
+struct Cell cellTypes[] =
+{
+	{0x00,{0x00,0x00,0x00,0xFF}},
+	{0xDB,{0x00,0x00,0xFF,0xFF}},
+	{0x02,{0xAA,0xAA,0xAA,0xFF}},
+};
 int main(int argc, char** argv)
 {
 	SDL_Window* window = 0;
@@ -36,12 +52,13 @@ int main(int argc, char** argv)
 
 StartDraw:
 	old = map[index];
-	map[index] = 2;
+	map[index] = CELLTYPE_DUDE;
 	SDL_RenderClear(renderer);
 	cell = 0;
 StartRenderCell:
 	if (GRID_COUNT == cell) goto EndRenderCell;
-	SDL_RenderCopy(renderer, texture, &srcRects[map[cell]], &dstRects[cell]);
+	SDL_SetTextureColorMod(texture, cellTypes[map[cell]].color.r, cellTypes[map[cell]].color.g, cellTypes[map[cell]].color.b);
+	SDL_RenderCopy(renderer, texture, &srcRects[cellTypes[map[cell]].character], &dstRects[cell]);
 	++cell;
 	goto StartRenderCell;
 EndRenderCell:
