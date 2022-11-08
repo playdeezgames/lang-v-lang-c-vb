@@ -1,22 +1,12 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
-enum {
-	SCREEN_WIDTH = 1280,
-	SCREEN_HEIGHT = 720,
-	CELL_WIDTH = 16,
-	CELL_HEIGHT = 16,
-
-	LOGICAL_WIDTH = SCREEN_WIDTH / 2,
-	LOGICAL_HEIGHT = SCREEN_HEIGHT / 2,
-	GRID_COLUMNS = LOGICAL_WIDTH/ CELL_WIDTH,
-	GRID_ROWS = LOGICAL_HEIGHT/CELL_HEIGHT,
-	GRID_COUNT = GRID_COLUMNS * GRID_ROWS
-};
+#include "Constants.h"
 enum {
 	CELLTYPE_EMPTY,
 	CELLTYPE_WALL,
-	CELLTYPE_DUDE
+	CELLTYPE_DUDE,
+	CELLTYPE_COUNT
 };
 extern SDL_Rect srcRects[];
 extern SDL_Rect dstRects[];
