@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="DstRects.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="Map.c" />
     <ClCompile Include="SrcRects.c" />
   </ItemGroup>
   <ItemGroup>
