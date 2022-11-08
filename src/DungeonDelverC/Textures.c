@@ -1,6 +1,7 @@
 #include "Textures.h"
 #include "Globals.h"
 #include <SDL_image.h>
+#include "Utility.h"
 static const char* s_filenames[TEXTURES_COUNT] = {"romfont8x8.png"};
 struct Textures
 {
@@ -9,8 +10,7 @@ struct Textures
 };
 struct Textures* Textures_Initialize(struct Globals* globals)
 {
-	struct Textures* ptr = (struct Textures*)SDL_malloc(sizeof(struct Textures));
-	SDL_memset(ptr, 0, sizeof(struct Textures));
+	struct Textures* ptr = (struct Textures*)Utility_Allocate(sizeof(struct Textures));
 	ptr->globals = globals;
 	for (int index = 0; index < TEXTURES_COUNT; ++index)
 	{
@@ -34,7 +34,6 @@ void Textures_CleanUp(struct Textures** ptr)
 				(*ptr)->textures[index] = 0;
 			}
 		}
-		SDL_free(*ptr);
-		*ptr = 0;
+		Utility_free((void**)ptr);
 	}
 }

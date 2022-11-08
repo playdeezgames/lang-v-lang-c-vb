@@ -1,20 +1,13 @@
 #include "Globals.h"
 #include "Boilerplate.h"
 #include "Application.h"
+#include "Utility.h"
 struct Boilerplate
 {
 	int running;
 	struct Globals* globals;
 	struct Application* application;
 };
-struct Globals* Boilerplate_GetGlobals(struct Boilerplate* ptr)
-{
-	return ptr->globals;
-}
-struct Application* Boilerplate_GetApplication(struct Boilerplate* ptr)
-{
-	return ptr->application;
-}
 static char Boilerplate_GetCommand(SDL_KeyCode code)
 {
 	switch (code)
@@ -71,9 +64,9 @@ void Boilerplate_Loop(struct Boilerplate* ptr)
 	SDL_Event event = { 0 };
 	for (;ptr->running;)
 	{
-		SDL_RenderClear(Globals_GetRenderer(Boilerplate_GetGlobals(ptr)));
-		Application_Draw(Boilerplate_GetApplication(ptr));
-		SDL_RenderPresent(Globals_GetRenderer(Boilerplate_GetGlobals(ptr)));
+		SDL_RenderClear(Globals_GetRenderer(ptr->globals));
+		Application_Draw(ptr->application);
+		SDL_RenderPresent(Globals_GetRenderer(ptr->globals));
 		while(ptr->running && SDL_PollEvent(&event))
 		{
 			switch (event.type)
@@ -94,8 +87,7 @@ struct Boilerplate* Boilerplate_Initialize()
 	{
 		return 0;
 	}
-	struct Boilerplate* ptr = SDL_malloc(sizeof(struct Boilerplate));
-	SDL_memset(ptr, 0, sizeof(struct Boilerplate));
+	struct Boilerplate* ptr = Utility_Allocate(sizeof(struct Boilerplate));
 	ptr->globals = Globals_Initialize();
 
 	SDL_Window* window = 0;
@@ -112,19 +104,18 @@ void Boilerplate_CleanUp(struct Boilerplate** ptr)
 	if (ptr && *ptr)
 	{
 		Application_CleanUp(&(*ptr)->application);
-		if (Globals_GetRenderer(Boilerplate_GetGlobals(*ptr)))
+		if (Globals_GetRenderer((*ptr)->globals))
 		{
-			SDL_DestroyRenderer(Globals_GetRenderer(Boilerplate_GetGlobals(*ptr)));
-			Globals_SetRenderer(Boilerplate_GetGlobals(*ptr), 0);
+			SDL_DestroyRenderer(Globals_GetRenderer((*ptr)->globals));
+			Globals_SetRenderer((*ptr)->globals, 0);
 		}
-		if (Globals_GetWindow(Boilerplate_GetGlobals(*ptr)))
+		if (Globals_GetWindow((*ptr)->globals))
 		{
-			SDL_DestroyWindow(Globals_GetWindow(Boilerplate_GetGlobals(*ptr)));
-			Globals_SetWindow(Boilerplate_GetGlobals(*ptr), 0);
+			SDL_DestroyWindow(Globals_GetWindow((*ptr)->globals));
+			Globals_SetWindow((*ptr)->globals, 0);
 		}
 		Globals_CleanUp(&(*ptr)->globals);
-		SDL_free(*ptr);
-		*ptr = 0;
+		Utility_free(ptr);
 		SDL_Quit();
 	}
 }

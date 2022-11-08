@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include "Utility.h"
 struct Globals
 {
 	SDL_Window* window;
@@ -6,17 +7,12 @@ struct Globals
 };
 struct Globals* Globals_Initialize()
 {
-	struct Globals* ptr = SDL_malloc(sizeof(struct Globals));
-	SDL_memset(ptr, 0, sizeof(struct Globals));
+	struct Globals* ptr = Utility_Allocate(sizeof(struct Globals));
 	return ptr;
 }
 void Globals_CleanUp(struct Globals** ptr)
 {
-	if (ptr && *ptr)
-	{
-		SDL_free(*ptr);
-		*ptr = 0;
-	}
+	Utility_free(ptr);
 }
 SDL_Window* Globals_GetWindow(struct Globals* ptr)
 {

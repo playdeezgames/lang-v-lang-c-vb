@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include <SDL_image.h>
 #include "Textures.h"
+#include "Utility.h"
 struct Application
 {
 	struct Textures* textures;
@@ -16,8 +17,7 @@ struct Globals* Application_GetGlobals(struct Application* ptr)
 }
 struct Application* Application_Initialize(struct Globals* globals)
 {
-	struct Application* ptr = SDL_malloc(sizeof(struct Application));
-	SDL_memset(ptr, 0, sizeof(struct Application));
+	struct Application* ptr = Utility_Allocate(sizeof(struct Application));
 	ptr->globals = globals;
 	ptr->textures = Textures_Initialize(globals);
 	SDL_RenderSetLogicalSize(Globals_GetRenderer(ptr->globals), SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
