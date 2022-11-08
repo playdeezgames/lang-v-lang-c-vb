@@ -139,19 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Boilerplate.c" />
     <ClCompile Include="Main.c" />
-    <ClCompile Include="Globals.c" />
-    <ClCompile Include="Application.c" />
-    <ClCompile Include="Textures.c" />
-    <ClCompile Include="Utility.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="Boilerplate.h" />
-    <ClInclude Include="Globals.h" />
-    <ClInclude Include="Textures.h" />
-    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="romfont8x8.png" />
