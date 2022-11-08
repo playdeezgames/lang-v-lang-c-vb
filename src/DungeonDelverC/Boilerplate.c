@@ -109,17 +109,22 @@ struct Boilerplate* Boilerplate_Initialize()
 }
 void Boilerplate_CleanUp(struct Boilerplate** ptr)
 {
-	Application_CleanUp(&(*ptr)->application);
-	if (Globals_GetRenderer(Boilerplate_GetGlobals(*ptr)))
+	if (ptr && *ptr)
 	{
-		SDL_DestroyRenderer(Globals_GetRenderer(Boilerplate_GetGlobals(*ptr)));
-		Globals_SetRenderer(Boilerplate_GetGlobals(*ptr), 0);
+		Application_CleanUp(&(*ptr)->application);
+		if (Globals_GetRenderer(Boilerplate_GetGlobals(*ptr)))
+		{
+			SDL_DestroyRenderer(Globals_GetRenderer(Boilerplate_GetGlobals(*ptr)));
+			Globals_SetRenderer(Boilerplate_GetGlobals(*ptr), 0);
+		}
+		if (Globals_GetWindow(Boilerplate_GetGlobals(*ptr)))
+		{
+			SDL_DestroyWindow(Globals_GetWindow(Boilerplate_GetGlobals(*ptr)));
+			Globals_SetWindow(Boilerplate_GetGlobals(*ptr), 0);
+		}
+		Globals_CleanUp(&(*ptr)->globals);
+		SDL_free(*ptr);
+		*ptr = 0;
+		SDL_Quit();
 	}
-	if (Globals_GetWindow(Boilerplate_GetGlobals(*ptr)))
-	{
-		SDL_DestroyWindow(Globals_GetWindow(Boilerplate_GetGlobals(*ptr)));
-		Globals_SetWindow(Boilerplate_GetGlobals(*ptr), 0);
-	}
-	Globals_CleanUp(&(*ptr)->globals);
-	SDL_Quit();
 }

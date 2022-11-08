@@ -36,5 +36,7 @@ void Application_CleanUp(struct Application** ptr)
 	{
 		Textures_CleanUp(&(*ptr)->textures);
 		IMG_Quit();
+		SDL_free(*ptr);
+		*ptr = 0;
 	}
 }
