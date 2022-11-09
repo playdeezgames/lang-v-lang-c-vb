@@ -2,7 +2,9 @@
 #define WORLD_H
 struct World
 {
-	int index;
+	int entityId;
+	int column;
+	int row;
 };
 void InitWorld(struct World*);
 #endif

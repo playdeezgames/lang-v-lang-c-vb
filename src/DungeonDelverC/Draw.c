@@ -21,12 +21,13 @@ void DrawScreen(struct Context* context)
 }
 void BeforeDraw(struct World* world)
 {
-	GetEntity(ENTITY_DUDE)->old_entity = GetCellMap(world->index % GRID_COLUMNS, world->index / GRID_COLUMNS);
-	SetCellMap(world->index % GRID_COLUMNS, world->index / GRID_COLUMNS, ENTITY_DUDE);
+	struct Entity* entity = GetEntity(world->entityId);
+	entity->old_entity = GetCellMap(world->column, world->row);
+	SetCellMap(world->column, world->row, world->entityId);
 }
 void AfterDraw(struct World* world)
 {
-	SetCellMap(world->index % GRID_COLUMNS, world->index / GRID_COLUMNS, GetEntity(ENTITY_DUDE)->old_entity);
+	SetCellMap(world->column, world->row, GetEntity(ENTITY_DUDE)->old_entity);
 }
 void Draw(struct Context* context, struct World* world)
 {

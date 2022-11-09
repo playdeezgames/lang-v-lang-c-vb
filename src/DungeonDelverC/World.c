@@ -1,6 +1,9 @@
 #include "World.h"
 #include "Constants.h"
+#include "Entity.h"
 void InitWorld(struct World* world)
 {
-	world->index = GRID_COLUMNS / 2 + (GRID_ROWS / 2) * GRID_COLUMNS;
+	world->entityId = ENTITY_DUDE;
+	world->column = GRID_COLUMNS / 2;
+	world->row = GRID_ROWS / 2;
 }
