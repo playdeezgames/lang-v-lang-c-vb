@@ -147,6 +147,7 @@
     <ClCompile Include="Main.c" />
     <ClCompile Include="CellMap.c" />
     <ClCompile Include="SrcRects.c" />
+    <ClCompile Include="World.c" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="romfont8x8.png" />
@@ -160,6 +161,7 @@
     <ClInclude Include="DstRects.h" />
     <ClInclude Include="HandleEvents.h" />
     <ClInclude Include="SrcRects.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

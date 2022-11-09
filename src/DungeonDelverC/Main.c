@@ -9,21 +9,25 @@
 #include "Entity.h"
 #include "Draw.h"
 #include "HandleEvents.h"
-int Init(struct Context* context)
+#include "World.h"
+int Init(struct Context* context, struct World* world)
 {
 	if (InitContext(context)) return 0;
 	InitSrcRects();
 	InitDstRects();
 	InitCellMap();
+	InitWorld(world);
 	return 1;
 }
 int main(int argc, char** argv)
 {
 	struct Context context = { 0 };
+	struct World world = { 0 };
 	int index = GRID_COLUMNS/2 + (GRID_ROWS/2) * GRID_COLUMNS;
-	if (Init(&context)) 
+	if (Init(&context, &world)) 
 		do Draw(&context, index); 
 		while (HandleEvents(&index));
 	CleanUpContext(&context);
+	//TODO: clean up world when that is needful
 	return 0;
 }
