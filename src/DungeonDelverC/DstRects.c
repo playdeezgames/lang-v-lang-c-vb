@@ -1,21 +1,16 @@
 #include "DstRects.h"
 #include "Constants.h"
 static SDL_Rect dstRects[GRID_COUNT] = { 0 };
-void InitDstRects()
+static void InitDstRect(int index, int column, int row)
 {
-	int index = 0;
-	int column;
-	int row;
-Loop:
-	if (index == GRID_COUNT) return;
-	row = index / GRID_COLUMNS;
-	column = index % GRID_COLUMNS;
 	dstRects[index].x = column * CELL_WIDTH;
 	dstRects[index].y = row * CELL_HEIGHT;
 	dstRects[index].w = CELL_WIDTH;
 	dstRects[index].h = CELL_HEIGHT;
-	++index;
-	goto Loop;
+}
+void InitDstRects()
+{
+	for (int index = 0; index < GRID_COUNT; ++index) InitDstRect(index, index % GRID_COLUMNS, index / GRID_COLUMNS);
 }
 SDL_Rect* GetDstRect(int index)
 {

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Context.c" />
     <ClCompile Include="DstRects.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="CellMap.c" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="CellMap.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Context.h" />
     <ClInclude Include="DstRects.h" />
     <ClInclude Include="SrcRects.h" />
   </ItemGroup>
