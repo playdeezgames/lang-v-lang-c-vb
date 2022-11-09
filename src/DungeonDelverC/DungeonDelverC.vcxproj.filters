@@ -24,7 +24,7 @@
     <ClCompile Include="DstRects.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CellMap.c">
+    <ClCompile Include="EntityMap.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Context.c">
@@ -58,7 +58,7 @@
     <ClInclude Include="DstRects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CellMap.h">
+    <ClInclude Include="EntityMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Context.h">

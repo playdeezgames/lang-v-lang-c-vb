@@ -3,7 +3,7 @@
 #include "Constants.h"
 #include "SrcRects.h"
 #include "DstRects.h"
-#include "CellMap.h"
+#include "EntityMap.h"
 void DrawCell(struct Context* context, struct Entity* entity, int cell)
 {
 	SDL_SetTextureColorMod(context->texture, entity->color.r, entity->color.g, entity->color.b);

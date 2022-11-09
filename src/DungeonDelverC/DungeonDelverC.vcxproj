@@ -145,7 +145,7 @@
     <ClCompile Include="DstRects.c" />
     <ClCompile Include="HandleEvents.c" />
     <ClCompile Include="Main.c" />
-    <ClCompile Include="CellMap.c" />
+    <ClCompile Include="EntityMap.c" />
     <ClCompile Include="SrcRects.c" />
     <ClCompile Include="World.c" />
   </ItemGroup>
@@ -153,7 +153,7 @@
     <CopyFileToFolders Include="romfont8x8.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CellMap.h" />
+    <ClInclude Include="EntityMap.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Constants.h" />

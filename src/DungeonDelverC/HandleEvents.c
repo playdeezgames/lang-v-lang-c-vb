@@ -1,7 +1,7 @@
 #include "HandleEvents.h"
 #include <SDL.h>
 #include "Constants.h"
-#include "CellMap.h"
+#include "EntityMap.h"
 static void HandleKeyDown(struct World* world, char command)
 {
 	//movement
