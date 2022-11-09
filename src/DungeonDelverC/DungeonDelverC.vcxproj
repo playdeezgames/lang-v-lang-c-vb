@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CellType.c" />
+    <ClCompile Include="Entity.c" />
     <ClCompile Include="Context.c" />
     <ClCompile Include="DstRects.c" />
     <ClCompile Include="Main.c" />
@@ -151,7 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CellMap.h" />
-    <ClInclude Include="CellType.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="DstRects.h" />

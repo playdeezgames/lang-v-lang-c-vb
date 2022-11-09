@@ -6,15 +6,15 @@
 #include "DstRects.h"
 #include "CellMap.h"
 #include "Context.h"
-#include "CellType.h"
-void DrawCell(struct Context* context, struct CellType* cellType, int cell)
+#include "Entity.h"
+void DrawCell(struct Context* context, struct Entity* entity, int cell)
 {
-	SDL_SetTextureColorMod(context->texture, cellType->color.r, cellType->color.g, cellType->color.b);
-	SDL_RenderCopy(context->renderer, context->texture, GetSrcRect(cellType->character), GetDstRect(cell));
+	SDL_SetTextureColorMod(context->texture, entity->color.r, entity->color.g, entity->color.b);
+	SDL_RenderCopy(context->renderer, context->texture, GetSrcRect(entity->character), GetDstRect(cell));
 }
 void DrawCells(struct Context* context)
 {
-	for (int cell = 0; cell < GRID_COUNT; ++cell) DrawCell(context, GetCellType(GetCellMap(cell % GRID_COLUMNS, cell / GRID_COLUMNS)), cell);
+	for (int cell = 0; cell < GRID_COUNT; ++cell) DrawCell(context, GetEntity(GetCellMap(cell % GRID_COLUMNS, cell / GRID_COLUMNS)), cell);
 }
 void DrawScreen(struct Context* context)
 {
@@ -39,7 +39,7 @@ int main(int argc, char** argv)
 
 StartDraw:
 	old = GetCellMap(index % GRID_COLUMNS, index/GRID_COLUMNS);
-	SetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS, CELLTYPE_DUDE);
+	SetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS, ENTITY_DUDE);
 
 	DrawScreen(&context);
 
