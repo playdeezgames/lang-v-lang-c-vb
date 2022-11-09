@@ -33,9 +33,7 @@ struct Context
 int main(int argc, char** argv)
 {
 	struct Context context = { 0 };
-	SDL_Renderer* renderer = 0;
 	SDL_Event event = { 0 };
-	SDL_Texture* texture = 0;
 	unsigned char old;
 	int index = GRID_COLUMNS/2 + (GRID_ROWS/2) * GRID_COLUMNS;
 	int nextIndex = 0;
@@ -47,9 +45,9 @@ int main(int argc, char** argv)
 
 	if (SDL_Init(SDL_INIT_EVERYTHING)) goto CleanUp; else initialized_sdl = 1;
 	IMG_Init(IMG_INIT_PNG), initialized_img = 1;
-	if (SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &context.window, &renderer)) goto CleanUp;
-	SDL_RenderSetLogicalSize(renderer, LOGICAL_WIDTH, LOGICAL_HEIGHT);
-	texture = IMG_LoadTexture(renderer, "romfont8x8.png");
+	if (SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &context.window, &context.renderer)) goto CleanUp;
+	SDL_RenderSetLogicalSize(context.renderer, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+	context.texture = IMG_LoadTexture(context.renderer, "romfont8x8.png");
 	InitSrcRects();
 	InitDstRects();
 	InitCellMap();
@@ -58,17 +56,17 @@ int main(int argc, char** argv)
 StartDraw:
 	old = GetCellMap(index % GRID_COLUMNS, index/GRID_COLUMNS);
 	SetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS, CELLTYPE_DUDE);
-	SDL_RenderClear(renderer);
+	SDL_RenderClear(context.renderer);
 	cell = 0;
 StartRenderCell:
 	if (GRID_COUNT == cell) goto EndRenderCell;
 	cellType = cellTypes + GetCellMap(cell % GRID_COLUMNS, cell / GRID_COLUMNS);
-	SDL_SetTextureColorMod(texture, cellType->color.r, cellType->color.g, cellType->color.b);
-	SDL_RenderCopy(renderer, texture, GetSrcRect(cellType->character), GetDstRect(cell));
+	SDL_SetTextureColorMod(context.texture, cellType->color.r, cellType->color.g, cellType->color.b);
+	SDL_RenderCopy(context.renderer, context.texture, GetSrcRect(cellType->character), GetDstRect(cell));
 	++cell;
 	goto StartRenderCell;
 EndRenderCell:
-	SDL_RenderPresent(renderer);
+	SDL_RenderPresent(context.renderer);
 	SetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS, old);
 
 StartEventLoop:
@@ -92,8 +90,8 @@ PostKeyDownEvent:
 EndEventLoop:
 
 CleanUp:
-	if (texture) SDL_DestroyTexture(texture), texture = 0;
-	if (renderer) SDL_DestroyRenderer(renderer), renderer = 0;
+	if (context.texture) SDL_DestroyTexture(context.texture), context.texture = 0;
+	if (context.renderer) SDL_DestroyRenderer(context.renderer), context.renderer = 0;
 	if (context.window) SDL_DestroyWindow(context.window), context.window = 0;
 	if (initialized_img) IMG_Quit(), initialized_img = 0;
 	if (initialized_sdl) SDL_Quit(), initialized_sdl = 0;
