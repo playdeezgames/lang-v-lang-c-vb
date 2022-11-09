@@ -33,7 +33,6 @@ struct Context
 int main(int argc, char** argv)
 {
 	struct Context context = { 0 };
-	SDL_Window* window = 0;
 	SDL_Renderer* renderer = 0;
 	SDL_Event event = { 0 };
 	SDL_Texture* texture = 0;
@@ -48,7 +47,7 @@ int main(int argc, char** argv)
 
 	if (SDL_Init(SDL_INIT_EVERYTHING)) goto CleanUp; else initialized_sdl = 1;
 	IMG_Init(IMG_INIT_PNG), initialized_img = 1;
-	if (SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer)) goto CleanUp;
+	if (SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &context.window, &renderer)) goto CleanUp;
 	SDL_RenderSetLogicalSize(renderer, LOGICAL_WIDTH, LOGICAL_HEIGHT);
 	texture = IMG_LoadTexture(renderer, "romfont8x8.png");
 	InitSrcRects();
@@ -95,7 +94,7 @@ EndEventLoop:
 CleanUp:
 	if (texture) SDL_DestroyTexture(texture), texture = 0;
 	if (renderer) SDL_DestroyRenderer(renderer), renderer = 0;
-	if (window) SDL_DestroyWindow(window), window = 0;
+	if (context.window) SDL_DestroyWindow(context.window), context.window = 0;
 	if (initialized_img) IMG_Quit(), initialized_img = 0;
 	if (initialized_sdl) SDL_Quit(), initialized_sdl = 0;
 	return 0;
