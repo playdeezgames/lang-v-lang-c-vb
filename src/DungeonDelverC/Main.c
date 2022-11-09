@@ -10,6 +10,7 @@
 #include "Draw.h"
 #include "HandleEvents.h"
 #include "World.h"
+
 int Init(struct Context* context, struct World* world)
 {
 	if (InitContext(context)) return 0;
