@@ -36,6 +36,9 @@
     <ClCompile Include="Draw.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HandleEvents.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="romfont8x8.png">
@@ -62,6 +65,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Draw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HandleEvents.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
