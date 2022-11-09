@@ -6,10 +6,12 @@ static void HandleKeyDown(struct World* world, char command)
 {
 	int nextColumn = world->column + (('4' == command) ? (-1) : ('6' == command) ? (1) : (0));
 	int nextRow = world->row + (('8' == command) ? (-1) : ('2' == command) ? (1) : (0));
-	struct Entity* entity = GetMapEntity(nextColumn, nextRow);
-	if (GetEntity(ENTITY_EMPTY) != entity) return;
+	struct Entity* nextEntity = GetMapEntity(nextColumn, nextRow);
+	if (GetEntityId(nextEntity) != ENTITY_EMPTY) return;
+	SetMapEntity(world->column, world->row, world->entity->leave_behind());
 	world->column = nextColumn;
 	world->row = nextRow;
+	SetMapEntity(world->column, world->row, world->entity);
 }
 static char ToCommand(SDL_KeyCode sym)
 {

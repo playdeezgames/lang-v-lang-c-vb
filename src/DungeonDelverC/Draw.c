@@ -21,12 +21,9 @@ void DrawScreen(struct Context* context)
 }
 void BeforeDraw(struct World* world)
 {
-	world->entity->old_entity = GetMapEntity(world->column, world->row);
-	SetMapEntity(world->column, world->row, world->entity);
 }
 void AfterDraw(struct World* world)
 {
-	SetMapEntity(world->column, world->row, GetEntity(ENTITY_DUDE)->old_entity);
 }
 void Draw(struct Context* context, struct World* world)
 {

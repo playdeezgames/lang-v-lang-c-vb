@@ -11,8 +11,8 @@ struct Entity
 {
 	unsigned char character;
 	SDL_Color color;
-	struct Entity* old_entity;
-	//can a different entity move onto this one?
+	struct Entity* (*leave_behind)();
 };
 struct Entity* GetEntity(int);
+int GetEntityId(struct Entity*);
 #endif
