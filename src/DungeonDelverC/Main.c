@@ -30,6 +30,23 @@ struct Context
 	SDL_Renderer* renderer;
 	SDL_Texture* texture;
 };
+int InitContext(struct Context* context)
+{
+	if (SDL_Init(SDL_INIT_EVERYTHING)) return -1; else context->sdl = 1;
+	IMG_Init(IMG_INIT_PNG), context->img = 1;
+	if (SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &(context->window), &(context->renderer))) return -1;
+	SDL_RenderSetLogicalSize(context->renderer, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+	context->texture = IMG_LoadTexture(context->renderer, "romfont8x8.png");
+	return 0;
+}
+void CleanUpContext(struct Context* context)
+{
+	if (context->texture) SDL_DestroyTexture(context->texture), context->texture = 0;
+	if (context->renderer) SDL_DestroyRenderer(context->renderer), context->renderer = 0;
+	if (context->window) SDL_DestroyWindow(context->window), context->window = 0;
+	if (context->img) IMG_Quit(), context->img = 0;
+	if (context->sdl) SDL_Quit(), context->sdl = 0;
+}
 int main(int argc, char** argv)
 {
 	struct Context context = { 0 };
@@ -40,18 +57,11 @@ int main(int argc, char** argv)
 	int delta = 0;
 	int cell = 0;
 	struct CellType* cellType = 0;
-	int initialized_sdl = 0;
-	int initialized_img = 0;
 
-	if (SDL_Init(SDL_INIT_EVERYTHING)) goto CleanUp; else initialized_sdl = 1;
-	IMG_Init(IMG_INIT_PNG), initialized_img = 1;
-	if (SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &context.window, &context.renderer)) goto CleanUp;
-	SDL_RenderSetLogicalSize(context.renderer, LOGICAL_WIDTH, LOGICAL_HEIGHT);
-	context.texture = IMG_LoadTexture(context.renderer, "romfont8x8.png");
+	if (InitContext(&context)) goto CleanUp;
 	InitSrcRects();
 	InitDstRects();
 	InitCellMap();
-
 
 StartDraw:
 	old = GetCellMap(index % GRID_COLUMNS, index/GRID_COLUMNS);
@@ -90,10 +100,6 @@ PostKeyDownEvent:
 EndEventLoop:
 
 CleanUp:
-	if (context.texture) SDL_DestroyTexture(context.texture), context.texture = 0;
-	if (context.renderer) SDL_DestroyRenderer(context.renderer), context.renderer = 0;
-	if (context.window) SDL_DestroyWindow(context.window), context.window = 0;
-	if (initialized_img) IMG_Quit(), initialized_img = 0;
-	if (initialized_sdl) SDL_Quit(), initialized_sdl = 0;
+	CleanUpContext(&context);
 	return 0;
 }
