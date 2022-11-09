@@ -4,7 +4,7 @@
 #include "Constants.h"
 #include "SrcRects.h"
 #include "DstRects.h"
-#include "EntityMap.h"
+#include "Map.h"
 #include "Context.h"
 #include "Entity.h"
 #include "Draw.h"

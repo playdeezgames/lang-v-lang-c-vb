@@ -1,5 +1,6 @@
 #include "Constants.h"
 #include "Entity.h"
+#include "Map.h"
 static struct Entity* cellMap[GRID_COUNT] = { 0 };
 void InitMap()
 {

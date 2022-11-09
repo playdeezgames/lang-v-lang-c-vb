@@ -1,7 +1,7 @@
 #include "HandleEvents.h"
 #include <SDL.h>
 #include "Constants.h"
-#include "EntityMap.h"
+#include "Map.h"
 static void HandleKeyDown(struct World* world, char command)
 {
 	int nextColumn = world->column + (('4' == command) ? (-1) : ('6' == command) ? (1) : (0));
