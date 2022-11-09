@@ -148,6 +148,7 @@
     <CopyFileToFolders Include="romfont8x8.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CellMap.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="DstRects.h" />
     <ClInclude Include="SrcRects.h" />

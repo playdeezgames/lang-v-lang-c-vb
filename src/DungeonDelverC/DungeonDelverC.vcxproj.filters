@@ -43,5 +43,8 @@
     <ClInclude Include="DstRects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CellMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

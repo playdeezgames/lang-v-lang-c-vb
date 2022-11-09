@@ -7,15 +7,13 @@ enum
 	PATTERN_COUNT = PATTERN_COLUMNS * PATTERN_ROWS
 };
 static SDL_Rect srcRects[PATTERN_COUNT] = { 0 };
-static void Initialize()
+void InitSrcRects()
 {
-	static int initialized = 0;
-	if (initialized) return;
 	int index = 0;
 	int column;
 	int row;
 Loop:
-	if (index == PATTERN_COUNT) goto Done;
+	if (index == PATTERN_COUNT) return;
 	column = index % PATTERN_COLUMNS;
 	row = index / PATTERN_ROWS;
 	srcRects[index].x = column * CELL_WIDTH;
@@ -24,11 +22,8 @@ Loop:
 	srcRects[index].h = CELL_HEIGHT;
 	++index;
 	goto Loop;
-Done:
-	initialized = 1;
 }
 SDL_Rect* GetSrcRect(int index)
 {
-	Initialize();
 	return srcRects + index;
 }
