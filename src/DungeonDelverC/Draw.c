@@ -19,18 +19,18 @@ void DrawScreen(struct Context* context)
 	DrawCells(context);
 	SDL_RenderPresent(context->renderer);
 }
-void BeforeDraw(int index)
+void BeforeDraw(struct World* world)
 {
-	GetEntity(ENTITY_DUDE)->old_entity = GetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS);
-	SetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS, ENTITY_DUDE);
+	GetEntity(ENTITY_DUDE)->old_entity = GetCellMap(world->index % GRID_COLUMNS, world->index / GRID_COLUMNS);
+	SetCellMap(world->index % GRID_COLUMNS, world->index / GRID_COLUMNS, ENTITY_DUDE);
 }
-void AfterDraw(int index)
+void AfterDraw(struct World* world)
 {
-	SetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS, GetEntity(ENTITY_DUDE)->old_entity);
+	SetCellMap(world->index % GRID_COLUMNS, world->index / GRID_COLUMNS, GetEntity(ENTITY_DUDE)->old_entity);
 }
-void Draw(struct Context* context, int index)
+void Draw(struct Context* context, struct World* world)
 {
-	BeforeDraw(index);
+	BeforeDraw(world);
 	DrawScreen(context);
-	AfterDraw(index);
+	AfterDraw(world);
 }

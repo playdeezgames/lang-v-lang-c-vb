@@ -23,10 +23,9 @@ int main(int argc, char** argv)
 {
 	struct Context context = { 0 };
 	struct World world = { 0 };
-	int index = GRID_COLUMNS/2 + (GRID_ROWS/2) * GRID_COLUMNS;
 	if (Init(&context, &world)) 
-		do Draw(&context, index); 
-		while (HandleEvents(&index));
+		do Draw(&context, &world); 
+		while (HandleEvents(&world));
 	CleanUpContext(&context);
 	//TODO: clean up world when that is needful
 	return 0;
