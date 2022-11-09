@@ -22,11 +22,25 @@ void DrawScreen(struct Context* context)
 	DrawCells(context);
 	SDL_RenderPresent(context->renderer);
 }
+void BeforeDraw(int index)
+{
+	GetEntity(ENTITY_DUDE)->old_entity = GetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS);
+	SetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS, ENTITY_DUDE);
+}
+void AfterDraw(int index)
+{
+	SetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS, GetEntity(ENTITY_DUDE)->old_entity);
+}
+void Draw(struct Context* context, int index)
+{
+	BeforeDraw(index);
+	DrawScreen(context);
+	AfterDraw(index);
+}
 int main(int argc, char** argv)
 {
 	struct Context context = { 0 };
 	SDL_Event event = { 0 };
-	int old;
 	int index = GRID_COLUMNS/2 + (GRID_ROWS/2) * GRID_COLUMNS;
 	int nextIndex = 0;
 	int delta = 0;
@@ -38,12 +52,7 @@ int main(int argc, char** argv)
 	InitCellMap();
 
 StartDraw:
-	old = GetCellMap(index % GRID_COLUMNS, index/GRID_COLUMNS);
-	SetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS, ENTITY_DUDE);
-
-	DrawScreen(&context);
-
-	SetCellMap(index % GRID_COLUMNS, index / GRID_COLUMNS, old);
+	Draw(&context, index);
 
 StartEventLoop:
 	if (!SDL_PollEvent(&event)) goto StartDraw;

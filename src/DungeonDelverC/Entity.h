@@ -11,6 +11,7 @@ struct Entity
 {
 	unsigned char character;
 	SDL_Color color;
+	int old_entity;
 };
 struct Entity* GetEntity(int);
 #endif
