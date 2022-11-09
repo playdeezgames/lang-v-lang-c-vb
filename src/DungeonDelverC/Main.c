@@ -10,11 +10,11 @@
 #include "Draw.h"
 int Init(struct Context* context)
 {
-	if (InitContext(context)) return -1;
+	if (InitContext(context)) return 0;
 	InitSrcRects();
 	InitDstRects();
 	InitCellMap();
-	return 0;
+	return 1;
 }
 void HandleKeyDown(int* index, SDL_KeyCode sym)
 {
@@ -33,20 +33,18 @@ void HandleKeyDown(int* index, SDL_KeyCode sym)
 int HandleEvents(int* index)
 {
 	static SDL_Event event = { 0 };
-StartEventLoop:
-	if (!SDL_PollEvent(&event)) return 1;
-
-	if (event.type == SDL_QUIT) return 0;
-
-	if (event.type == SDL_KEYDOWN) HandleKeyDown(index, event.key.keysym.sym);
-
-	goto StartEventLoop;
+	for(;;)
+		if (!SDL_PollEvent(&event)) return 1; 
+		else if (event.type == SDL_QUIT) return 0; 
+		else if (event.type == SDL_KEYDOWN) HandleKeyDown(index, event.key.keysym.sym);
 }
 int main(int argc, char** argv)
 {
 	struct Context context = { 0 };
 	int index = GRID_COLUMNS/2 + (GRID_ROWS/2) * GRID_COLUMNS;
-	if (!Init(&context)) do Draw(&context, index); while (HandleEvents(&index));
+	if (Init(&context)) 
+		do Draw(&context, index); 
+		while (HandleEvents(&index));
 	CleanUpContext(&context);
 	return 0;
 }
