@@ -15,7 +15,7 @@ int Init(struct Context* context, struct World* world)
 	if (InitContext(context)) return 0;
 	InitSrcRects();
 	InitDstRects();
-	InitCellMap();
+	InitEntityMap();
 	InitWorld(world);
 	return 1;
 }

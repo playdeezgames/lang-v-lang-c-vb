@@ -1,8 +1,9 @@
 #ifndef WORLD_H
 #define WORLD_H
+#include "Entity.h"
 struct World
 {
-	int entityId;
+	struct Entity* entity;
 	int column;
 	int row;
 };

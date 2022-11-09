@@ -4,12 +4,10 @@
 #include "EntityMap.h"
 static void HandleKeyDown(struct World* world, char command)
 {
-	//movement
 	int nextColumn = world->column + (('4' == command) ? (-1) : ('6' == command) ? (1) : (0));
 	int nextRow = world->row + (('8' == command) ? (-1) : ('2' == command) ? (1) : (0));
-	//collision
-	int entityId = GetCellMap(nextColumn, nextRow);
-	if (0 != entityId) return;
+	struct Entity* entity = GetEntityMap(nextColumn, nextRow);
+	if (GetEntity(ENTITY_EMPTY) != entity) return;
 	world->column = nextColumn;
 	world->row = nextRow;
 }
