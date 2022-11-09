@@ -1,11 +1,13 @@
-# lang-v-lang-c-vb
-Language v. Language: C versus VB.NET
+# The Blue Room
+A game in C about a room that is blue.
 
 # Log
 
-XYZ Lang v. Lang: C and VB Edition #Niche4Life
+XYZ "The Blue Room" #Niche4Life
 
 * 001 - 20221107
+* 002 - 20221108
+* 003 - 20221109
 
 # Rules
 

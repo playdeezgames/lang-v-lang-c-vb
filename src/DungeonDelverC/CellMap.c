@@ -1,5 +1,5 @@
 #include "Constants.h"
-static unsigned char cellMap[GRID_COUNT] = { 0 };
+static int cellMap[GRID_COUNT] = { 0 };
 void InitCellMap()
 {
 	int index = 0;
@@ -14,12 +14,12 @@ Loop:
 	goto Loop;
 }
 
-void SetCellMap(int column, int row, unsigned char cellType)
+void SetCellMap(int column, int row, int cellType)
 {
 	cellMap[column + row * GRID_COLUMNS] = cellType;
 }
 
-unsigned char GetCellMap(int column, int row)
+int GetCellMap(int column, int row)
 {
 	return cellMap[column + row * GRID_COLUMNS];
 }
