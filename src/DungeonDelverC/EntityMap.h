@@ -1,7 +1,7 @@
 #ifndef ENTITYMAP_H
 #define ENTITYMAP_H
 #include "Entity.h"
-void InitEntityMap();
-void SetEntityMap(int, int, struct Entity*);
-struct Entity* GetEntityMap(int, int);
+void InitMap();
+void SetMapEntity(int, int, struct Entity*);
+struct Entity* GetMapEntity(int, int);
 #endif

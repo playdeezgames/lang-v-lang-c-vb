@@ -1,7 +1,7 @@
 #include "Constants.h"
 #include "Entity.h"
 static struct Entity* cellMap[GRID_COUNT] = { 0 };
-void InitEntityMap()
+void InitMap()
 {
 	int index = 0;
 	int column;
@@ -14,11 +14,11 @@ Loop:
 	++index;
 	goto Loop;
 }
-void SetEntityMap(int column, int row, struct Entity* cellType)
+void SetMapEntity(int column, int row, struct Entity* cellType)
 {
 	cellMap[column + row * GRID_COLUMNS] = cellType;
 }
-struct Entity* GetEntityMap(int column, int row)
+struct Entity* GetMapEntity(int column, int row)
 {
 	return cellMap[column + row * GRID_COLUMNS];
 }

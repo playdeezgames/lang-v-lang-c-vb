@@ -11,7 +11,7 @@ void DrawCell(struct Context* context, struct Entity* entity, int cell)
 }
 void DrawCells(struct Context* context)
 {
-	for (int cell = 0; cell < GRID_COUNT; ++cell) DrawCell(context, GetEntityMap(cell % GRID_COLUMNS, cell / GRID_COLUMNS), cell);
+	for (int cell = 0; cell < GRID_COUNT; ++cell) DrawCell(context, GetMapEntity(cell % GRID_COLUMNS, cell / GRID_COLUMNS), cell);
 }
 void DrawScreen(struct Context* context)
 {
@@ -21,12 +21,12 @@ void DrawScreen(struct Context* context)
 }
 void BeforeDraw(struct World* world)
 {
-	world->entity->old_entity = GetEntityMap(world->column, world->row);
-	SetEntityMap(world->column, world->row, world->entity);
+	world->entity->old_entity = GetMapEntity(world->column, world->row);
+	SetMapEntity(world->column, world->row, world->entity);
 }
 void AfterDraw(struct World* world)
 {
-	SetEntityMap(world->column, world->row, GetEntity(ENTITY_DUDE)->old_entity);
+	SetMapEntity(world->column, world->row, GetEntity(ENTITY_DUDE)->old_entity);
 }
 void Draw(struct Context* context, struct World* world)
 {
