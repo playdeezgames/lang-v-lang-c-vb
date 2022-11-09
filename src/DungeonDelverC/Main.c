@@ -22,8 +22,17 @@ struct CellType cellTypes[] =
 	{0xDB,{0x00,0x00,0xFF,0xFF}},
 	{0x02,{0xAA,0xAA,0xAA,0xFF}},
 };
+struct Context
+{
+	int sdl;
+	int img;
+	SDL_Window* window;
+	SDL_Renderer* renderer;
+	SDL_Texture* texture;
+};
 int main(int argc, char** argv)
 {
+	struct Context context = { 0 };
 	SDL_Window* window = 0;
 	SDL_Renderer* renderer = 0;
 	SDL_Event event = { 0 };
