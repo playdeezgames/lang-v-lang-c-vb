@@ -12,6 +12,7 @@ struct Entity
 	unsigned char character;
 	SDL_Color color;
 	int old_entity;
+	//can a different entity move onto this one?
 };
 struct Entity* GetEntity(int);
 #endif
