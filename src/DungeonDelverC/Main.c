@@ -4,9 +4,7 @@
 #include "Constants.h"
 #include "SrcRects.h"
 #include "DstRects.h"
-#include "Map.h"
 #include "Context.h"
-#include "Entity.h"
 #include "Draw.h"
 #include "HandleEvents.h"
 #include "World.h"
@@ -18,7 +16,6 @@ int Init()
 	if (InitContext(&context)) return 0;
 	InitSrcRects();
 	InitDstRects();
-	InitMap();
 	InitWorld(&world);
 	SetDrawContext(&context);
 	SetDrawWorld(&world);

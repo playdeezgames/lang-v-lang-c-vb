@@ -1,9 +1,7 @@
 #include "Draw.h"
-#include "Entity.h"
 #include "Constants.h"
 #include "SrcRects.h"
 #include "DstRects.h"
-#include "Map.h"
 static struct Context* drawContext = 0;
 static struct World* drawWorld = 0;
 void SetDrawContext(struct Context* context)

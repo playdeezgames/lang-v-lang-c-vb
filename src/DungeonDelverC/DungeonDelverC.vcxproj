@@ -145,12 +145,10 @@
     <ClCompile Include="BoardCell.c" />
     <ClCompile Include="BoardRow.c" />
     <ClCompile Include="Draw.c" />
-    <ClCompile Include="Entity.c" />
     <ClCompile Include="Context.c" />
     <ClCompile Include="DstRects.c" />
     <ClCompile Include="HandleEvents.c" />
     <ClCompile Include="Main.c" />
-    <ClCompile Include="Map.c" />
     <ClCompile Include="SrcRects.c" />
     <ClCompile Include="Terrain.c" />
     <ClCompile Include="World.c" />
@@ -164,9 +162,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardCell.h" />
     <ClInclude Include="BoardRow.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="Draw.h" />
-    <ClInclude Include="Entity.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="DstRects.h" />

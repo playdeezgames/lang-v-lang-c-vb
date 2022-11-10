@@ -24,13 +24,7 @@
     <ClCompile Include="DstRects.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Map.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Context.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Draw.c">
@@ -76,13 +70,7 @@
     <ClInclude Include="DstRects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Draw.h">
