@@ -139,6 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Atlas.c" />
+    <ClCompile Include="AtlasRow.c" />
+    <ClCompile Include="Board.c" />
+    <ClCompile Include="BoardCell.c" />
+    <ClCompile Include="BoardRow.c" />
     <ClCompile Include="Draw.c" />
     <ClCompile Include="Entity.c" />
     <ClCompile Include="Context.c" />
@@ -147,12 +152,18 @@
     <ClCompile Include="Main.c" />
     <ClCompile Include="Map.c" />
     <ClCompile Include="SrcRects.c" />
+    <ClCompile Include="Terrain.c" />
     <ClCompile Include="World.c" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="romfont8x8.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Atlas.h" />
+    <ClInclude Include="AtlasRow.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="BoardCell.h" />
+    <ClInclude Include="BoardRow.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="Entity.h" />
@@ -161,6 +172,7 @@
     <ClInclude Include="DstRects.h" />
     <ClInclude Include="HandleEvents.h" />
     <ClInclude Include="SrcRects.h" />
+    <ClInclude Include="Terrain.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
