@@ -4,30 +4,18 @@
 #include "SrcRects.h"
 #include "DstRects.h"
 #include "Map.h"
-void DrawCell(struct Context* context, struct Entity* entity, int cell)
+void DrawBoardCell(struct Context* context, struct BoardCell* boardCell, int gridRow, int gridColumn)
 {
-	SDL_SetTextureColorMod(context->texture, entity->color.r, entity->color.g, entity->color.b);
-	SDL_RenderCopy(context->renderer, context->texture, GetSrcRect(entity->character), GetDstRect(cell));
+	int index = (boardCell->terrain.terrain_id == 0) ? (0x00) : (0xdb);
+	SDL_RenderCopy(context->renderer, context->texture, GetSrcRect(index), GetDstRect(gridRow * GRID_COLUMNS + gridColumn));
 }
-void DrawCells(struct Context* context)
+void DrawBoardRow(struct Context* context, struct BoardRow* boardRow, int gridRow)
 {
-	for (int cell = 0; cell < GRID_COUNT; ++cell) DrawCell(context, GetMapEntity(cell % GRID_COLUMNS, cell / GRID_COLUMNS), cell);
-}
-void DrawScreen(struct Context* context)
-{
-	SDL_RenderClear(context->renderer);
-	DrawCells(context);
-	SDL_RenderPresent(context->renderer);
-}
-void BeforeDraw(struct World* world)
-{
-}
-void AfterDraw(struct World* world)
-{
+	for (int gridCell = 0; gridCell < BOARD_COLUMNS; ++gridCell) DrawBoardCell(context, &boardRow->cells[gridCell], gridRow, gridCell);
 }
 void Draw(struct Context* context, struct World* world)
 {
-	BeforeDraw(world);
-	DrawScreen(context);
-	AfterDraw(world);
+	SDL_RenderClear(context->renderer);
+	for (int gridRow = 0; gridRow < BOARD_ROWS; ++gridRow) DrawBoardRow(context, &world->atlas.rows[world->atlas_row].boards[world->atlas_column].rows[gridRow],gridRow);
+	SDL_RenderPresent(context->renderer);
 }

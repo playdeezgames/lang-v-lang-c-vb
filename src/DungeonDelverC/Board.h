@@ -3,7 +3,7 @@
 #include "BoardRow.h"
 enum
 {
-	BOARD_ROWS = 21
+	BOARD_ROWS = 22
 };
 struct Board
 {
