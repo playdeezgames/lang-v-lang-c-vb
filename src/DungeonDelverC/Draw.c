@@ -4,18 +4,30 @@
 #include "SrcRects.h"
 #include "DstRects.h"
 #include "Map.h"
-void DrawBoardCell(struct Context* context, struct BoardCell* boardCell, int gridRow, int gridColumn)
+static struct Context* drawContext = 0;
+static struct World* drawWorld = 0;
+void SetDrawContext(struct Context* context)
 {
-	int index = (boardCell->terrain.terrain_id == 0) ? (0x00) : (0xdb);
-	SDL_RenderCopy(context->renderer, context->texture, GetSrcRect(index), GetDstRect(gridRow * GRID_COLUMNS + gridColumn));
+	drawContext = context;
 }
-void DrawBoardRow(struct Context* context, struct BoardRow* boardRow, int gridRow)
+void SetDrawWorld(struct World* world)
 {
-	for (int gridCell = 0; gridCell < BOARD_COLUMNS; ++gridCell) DrawBoardCell(context, &boardRow->cells[gridCell], gridRow, gridCell);
+	drawWorld = world;
 }
-void Draw(struct Context* context, struct World* world)
+void DrawBoardCell(int gridRow, int gridColumn)
 {
-	SDL_RenderClear(context->renderer);
-	for (int gridRow = 0; gridRow < BOARD_ROWS; ++gridRow) DrawBoardRow(context, &world->atlas.rows[world->atlas_row].boards[world->atlas_column].rows[gridRow],gridRow);
-	SDL_RenderPresent(context->renderer);
+	int terrain_id = drawWorld->atlas.rows[drawWorld->atlas_row].boards[drawWorld->atlas_column].rows[gridRow].cells[gridColumn].terrain.terrain_id;
+	struct TerrainDescriptor* terrain_descriptor = GetTerrainDescriptor(terrain_id);
+	SDL_SetTextureColorMod(drawContext->texture, terrain_descriptor->color.r, terrain_descriptor->color.g, terrain_descriptor->color.b);
+	SDL_RenderCopy(drawContext->renderer, drawContext->texture, GetSrcRect(terrain_descriptor->character), GetDstRect(gridRow * GRID_COLUMNS + gridColumn));
+}
+void DrawBoardRow(int gridRow)
+{
+	for (int gridCell = 0; gridCell < BOARD_COLUMNS; ++gridCell) DrawBoardCell(gridRow, gridCell);
+}
+void Draw()
+{
+	SDL_RenderClear(drawContext->renderer);
+	for (int gridRow = 0; gridRow < BOARD_ROWS; ++gridRow) DrawBoardRow(gridRow);
+	SDL_RenderPresent(drawContext->renderer);
 }

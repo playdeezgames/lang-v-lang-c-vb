@@ -11,21 +11,23 @@
 #include "HandleEvents.h"
 #include "World.h"
 
-int Init(struct Context* context, struct World* world)
+static struct Context context = { 0 };
+static struct World world = { 0 };
+int Init()
 {
-	if (InitContext(context)) return 0;
+	if (InitContext(&context)) return 0;
 	InitSrcRects();
 	InitDstRects();
 	InitMap();
-	InitWorld(world);
+	InitWorld(&world);
+	SetDrawContext(&context);
+	SetDrawWorld(&world);
 	return 1;
 }
 int main(int argc, char** argv)
 {
-	struct Context context = { 0 };
-	struct World world = { 0 };
-	if (Init(&context, &world)) 
-		do Draw(&context, &world); 
+	if (Init()) 
+		do Draw(); 
 		while (HandleEvents(&world));
 	CleanUpContext(&context);
 	//TODO: clean up world when that is needful
